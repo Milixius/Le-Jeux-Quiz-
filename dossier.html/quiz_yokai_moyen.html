@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quiz Yo-kai Watch – Moyen</title>
+
+<style>
+    body {
+        background: url("c:/Users/Maxime/Pictures/fond_quiz_yokaiwatch_moyen.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        color: white;
+        text-shadow: 1px 1px 0 black;
+    }
+
+    .container {
+        background: rgba(0,0,0,0.6);
+        padding: 25px;
+        border-radius: 15px;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        color: #00c8ff;
+        font-size: 40px;
+    }
+
+    .question {
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+    #btnValider {
+        padding: 12px 25px;
+        font-size: 20px;
+        background: #00c8ff;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+        display: block;
+        margin: 20px auto;
+    }
+
+    #btnValider:hover {
+        transform: scale(1.05);
+    }
+
+    .bouton-retour {
+        padding: 12px 25px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #ff0044, #000000);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+
+        box-shadow: 0 0 12px rgba(255,0,68,0.7),
+                    0 0 12px rgba(0,0,0,0.8);
+        transition: 0.25s ease;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .bouton-retour:hover {
+        transform: scale(1.1);
+    }
+
+    /* Bouton musique */
+    #musiqueYokaiBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+
+        padding: 12px 25px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #ff0044, #000000);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+
+        box-shadow: 0 0 12px rgba(255,0,68,0.7),
+                    0 0 12px rgba(0,0,0,0.8);
+        transition: 0.25s ease;
+        z-index: 9999;
+    }
+
+    #musiqueYokaiBtn:hover {
+        transform: scale(1.1);
+    }
+
+    /* Écran noir transition */
+    #transitionScreen {
+        position: fixed;
+        inset: 0;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.6s ease;
+        z-index: 99999;
+    }
+
+    #resultat {
+        margin-top: 20px;
+        font-size: 24px;
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+
+<button id="musiqueYokaiBtn" onclick="toggleMusique()">Activer musique</button>
+<audio id="musiqueYokai" src="c:\Users\Maxime\Music\musique_quiz_yokaiwatch_moyen.mp3" loop preload="auto"></audio>
+
+<audio id="transitionSound" src="c:\Users\Maxime\Music\sons_transition.mp3" preload="auto"></audio>
+<div id="transitionScreen"></div>
+
+<div class="container">
+
+    <h1>Quiz Yo-kai Watch – Niveau Moyen</h1>
+
+    <form id="quiz">
+
+        <div class="question">
+            1. Comment s'appelle le boss de la Grande Route Dorée ?
+            <br>
+            <input type="radio" name="q1" value="A"> Bogos<br>
+            <input type="radio" name="q1" value="B"> Blingos<br>
+            <input type="radio" name="q1" value="C"> Ultraos<br>
+        </div>
+
+        <div class="question">
+            2. Comment s'appelle le Yokai qui se met les 2 doigts dans le nez ?
+            <br>
+            <input type="radio" name="q2" value="A"> Tengubre<br>
+            <input type="radio" name="q2" value="B"> Mephito<br>
+            <input type="radio" name="q2" value="C"> Narinos<br>
+        </div>
+
+        <div class="question">
+            3. Combien y-a-t'il de tribus dans Yokai Watch 2 ?
+            <br>
+            <input type="radio" name="q3" value="A"> 8<br>
+            <input type="radio" name="q3" value="B"> 9<br>
+            <input type="radio" name="q3" value="C"> 10<br>
+        </div>
+
+        <div class="question">
+            4. De quelle Tribu Potofeu appartient-il ?
+            <br>
+            <input type="radio" name="q4" value="A"> Sinitstre<br>
+            <input type="radio" name="q4" value="B"> Sombre<br>
+            <input type="radio" name="q4" value="C"> Ténèbre<br>
+        </div>
+
+        <div class="question">
+            5. Quel est l'élément de Kyubi
+            <br>
+            <input type="radio" name="q5" value="A"> La glace<br>
+            <input type="radio" name="q5" value="B"> Le feu<br>
+            <input type="radio" name="q5" value="C"> L'absorption<br>
+        </div>
+
+        <div class="question">
+            6. Quel est la version de base de Démona ?
+            <br>
+            <input type="radio" name="q6" value="A"> Blizzaria<br>
+            <input type="radio" name="q6" value="B"> Angelik<br>
+            <input type="radio" name="q6" value="C"> Octorgombre<br>
+        </div>
+
+        <div class="question">
+            7. Quel Yo-kai porte chance ?
+            <br>
+            <input type="radio" name="q7" value="A"> Noko<br>
+            <input type="radio" name="q7" value="B"> Télémir<br>
+            <input type="radio" name="q7" value="C"> Nokonoko<br>
+        </div>
+
+        <div class="question">
+            8. Qui est le Yo-kai qui fais le plus peur au enfant ?
+            <br>
+            <input type="radio" name="q8" value="A"> Zerberker<br>
+            <input type="radio" name="q8" value="B"> Fouetar<br>
+            <input type="radio" name="q8" value="C"> Maltesse<br>
+        </div>
+
+        <div class="question">
+            9. Qu'est-ce que Mc Kraken as dans la paume de ces main ? 
+            <br>
+            <input type="radio" name="q9" value="A"> Des yeux<br>
+            <input type="radio" name="q9" value="B"> Des ventouse<br>
+            <input type="radio" name="q9" value="C"> Des bouche<br>
+        </div>
+
+        <div class="question">
+            10. Peut-on faire des oni nos amis dans Yo-kai Watch 2?
+            <br>
+            <input type="radio" name="q10" value="A"> Certainement pas<br>
+            <input type="radio" name="q10" value="B"> Je ne sais pas et donc s'est un piège<br>
+            <input type="radio" name="q10" value="C"> Oui<br>
+        </div>
+
+    </form>
+
+    <button id="btnValider" onclick="corriger()">Valider mes réponses</button>
+
+    <button class="bouton-retour" onclick="transitionAccueil()">
+        Retour à l'accueil
+    </button>
+
+    <div id="resultat"></div>
+
+</div>
+
+<script>
+function corriger() {
+
+    let bonnesReponses = {
+        q1: "B",
+        q2: "C",
+        q3: "A",
+        q4: "B",
+        q5: "B",
+        q6: "A",
+        q7: "A",
+        q8: "B",
+        q9: "B",
+        q10: "C"
+    };
+
+    let score = 0;
+
+    for (let q in bonnesReponses) {
+        let choix = document.querySelector('input[name="'+q+'"]:checked');
+        if (choix && choix.value === bonnesReponses[q]) {
+            score++;
+        }
+    }
+
+    document.getElementById("resultat").innerHTML =
+        "Score : " + score + " / 10";
+
+    let btn = document.getElementById("btnValider");
+    btn.disabled = true;
+    btn.style.background = "#555";
+    btn.style.cursor = "not-allowed";
+}
+
+/* Musique */
+let musiqueActive = false;
+const musique = document.getElementById("musiqueYokai");
+const btnMusique = document.getElementById("musiqueYokaiBtn");
+
+function toggleMusique() {
+    if (!musiqueActive) {
+        musique.volume = 0.5;
+        musique.play();
+        musiqueActive = true;
+        btnMusique.textContent = "Désactiver musique";
+    } else {
+        musique.pause();
+        musiqueActive = false;
+        btnMusique.textContent = "Activer musique";
+    }
+}
+
+/* Transition retour accueil */
+function transitionAccueil() {
+
+    let s = document.getElementById("transitionSound").cloneNode(true);
+    s.volume = 0.25;
+    s.play();
+
+    const screen = document.getElementById("transitionScreen");
+    screen.style.opacity = "1";
+
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 600);
+}
+</script>
+
+</body>
+</html>

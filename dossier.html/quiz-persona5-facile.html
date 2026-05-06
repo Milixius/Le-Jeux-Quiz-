@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Persona 5 - Facile</title>
+
+    <style>
+
+        /* Bouton retour Persona */
+        .bouton-retour {
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #ff003c, #000000);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+            box-shadow: 0 0 12px rgba(255,0,60,0.7),
+                        0 0 12px rgba(0,0,0,0.8);
+            transition: 0.25s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .bouton-retour:hover {
+            transform: scale(1.1);
+        }
+
+        /* Bouton musique Persona */
+        #musiquePersonaBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #ff003c, #000000);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+            box-shadow: 0 0 12px rgba(255, 0, 60, 0.7),
+                        0 0 12px rgba(0, 0, 0, 0.8);
+
+            transition: 0.25s ease;
+            z-index: 9999;
+        }
+
+        #musiquePersonaBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 18px rgba(255, 0, 60, 1),
+                        0 0 18px rgba(0, 0, 0, 1);
+        }
+
+        #musiquePersonaBtn:active {
+            transform: scale(0.95);
+        }
+
+        /* Écran noir pour transition */
+        #transitionScreen {
+            position: fixed;
+            inset: 0;
+            background: black;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            z-index: 9999;
+        }
+
+        body {
+            background: url("c:/Users/Maxime/Pictures/fond quiz Persona 5.png") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            color: white;
+            text-shadow: 1px 1px 0 black;
+        }
+
+        .container {
+            background: rgba(0,0,0,0.6);
+            padding: 25px;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff0000;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        #btnValider {
+            padding: 12px 25px;
+            font-size: 20px;
+            background: #ff0000;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        #btnValider:hover {
+            transform: scale(1.05);
+        }
+
+        #resultat {
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<button id="musiquePersonaBtn" onclick="toggleMusiquePersona()">Activer musique Persona</button>
+
+<audio id="musiquePersona" src="c:\Users\Maxime\Music\musique_quiz_persona_facile.mp3" loop preload="auto"></audio>
+
+<audio id="transitionSound" src="sons_transition.mp3" preload="auto"></audio>
+<div id="transitionScreen"></div>
+
+<div class="container">
+
+    <h1>Quiz Persona 5 – Facile</h1>
+
+    <form id="quiz">
+
+        <div class="question">
+            1. Quel est le nom de code héros principal ?
+            <br>
+            <input type="radio" name="q1" value="A"> Voleur<br>
+            <input type="radio" name="q1" value="B"> Espion<br>
+            <input type="radio" name="q1" value="C"> Joker<br>
+        </div>
+
+        <div class="question">
+            2. Quel est le nom du chat parlant ?
+            <br>
+            <input type="radio" name="q2" value="A"> Teddy<br>
+            <input type="radio" name="q2" value="B"> Morgana<br>
+            <input type="radio" name="q2" value="C"> Koromaru<br>
+        </div>
+
+        <div class="question">
+            3. Comment s’appelle le groupe des héros ?
+            <br>
+            <input type="radio" name="q3" value="A"> Les tueur de L'ombre<br>
+            <input type="radio" name="q3" value="B"> Les Voleurs Fantome<br>
+            <input type="radio" name="q3" value="C"> Les dérobeur de coeur<br>
+        </div>
+
+        <div class="question">
+            4. Quel est le premier ennemi du jeu ?
+            <br>
+            <input type="radio" name="q4" value="A"> Une Pixie<br>
+            <input type="radio" name="q4" value="B"> Un Slime<br>
+            <input type="radio" name="q4" value="C"> La Faucheuse<br>
+        </div>
+
+        <div class="question">
+            5. Quel est le nom du premier ami que se fais le héro ?
+            <br>
+            <input type="radio" name="q5" value="A"> Yusuke<br>
+            <input type="radio" name="q5" value="B"> Ryuji<br>
+            <input type="radio" name="q5" value="C"> Ann<br>
+        </div>
+
+        <div class="question">
+            6. Comment s’appelle la Persona initiale du héros ?
+            <br>
+            <input type="radio" name="q6" value="A"> Arsène<br>
+            <input type="radio" name="q6" value="B"> Carmen<br>
+            <input type="radio" name="q6" value="C"> Zorro<br>
+        </div>
+
+        <div class="question">
+            7. Quel est le nom de la ville où se déroule le jeu ?
+            <br>
+            <input type="radio" name="q7" value="A"> Kyoto<br>
+            <input type="radio" name="q7" value="B"> Tokyo<br>
+            <input type="radio" name="q7" value="C"> Osaka<br>
+        </div>
+
+        <div class="question">
+            8. Qui est le tuteur du personnage principal ?
+            <br>
+            <input type="radio" name="q8" value="A"> Maruki<br>
+            <input type="radio" name="q8" value="B"> Sojiro<br>
+            <input type="radio" name="q8" value="C"> Tekemi<br>
+        </div>
+
+        <div class="question">
+            9. Quel est le nom du monde parallèle ?
+            <br>
+            <input type="radio" name="q9" value="A"> Le Velvet World<br>
+            <input type="radio" name="q9" value="B"> Le Dark Realm<br>
+            <input type="radio" name="q9" value="C"> Le Metaverse<br>
+        </div>
+
+        <div class="question">
+            10. Comment s’appelle l’école du héros ?
+            <br>
+            <input type="radio" name="q10" value="A"> Shujin Academy<br>
+            <input type="radio" name="q10" value="B"> Yasogami High<br>
+            <input type="radio" name="q10" value="C"> Gekkoukan High<br>
+        </div>
+
+    </form>
+
+    <button id="btnValider" onclick="corriger()">Valider mes réponses</button>
+
+    <!-- BOUTON RETOUR JOLI -->
+    <button class="bouton-retour" onclick="transitionAccueil()">Retour à l'accueil</button>
+
+    <div id="resultat"></div>
+
+</div>
+
+<script>
+function corriger() {
+
+    let bonnesReponses = {
+        q1: "C",
+        q2: "B",
+        q3: "B",
+        q4: "A",
+        q5: "B",
+        q6: "A",
+        q7: "B",
+        q8: "B",
+        q9: "C",
+        q10: "A"
+    };
+
+    let score = 0;
+
+    for (let q in bonnesReponses) {
+        let choix = document.querySelector('input[name="'+q+'"]:checked');
+        if (choix && choix.value === bonnesReponses[q]) {
+            score++;
+        }
+    }
+
+    document.getElementById("resultat").innerHTML =
+        "Score : " + score + " / 10";
+
+    // Désactive et grise le bouton Valider
+    let btn = document.getElementById("btnValider");
+    btn.disabled = true;
+    btn.style.background = "#555";
+    btn.style.cursor = "not-allowed";
+}
+</script>
+
+<script>
+function transitionAccueil() {
+
+    // Son de transition
+    let s = document.getElementById("transitionSound").cloneNode(true);
+    s.volume = 0.25;
+    s.play();
+
+    // Animation de fondu noir
+    const screen = document.getElementById("transitionScreen");
+    screen.style.opacity = "1";
+
+    // Attendre la fin de l'animation avant de changer de page
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 600);
+}
+</script>
+
+<script>
+let personaMusiqueActive = false;
+const personaMusique = document.getElementById("musiquePersona");
+const personaBtn = document.getElementById("musiquePersonaBtn");
+
+function toggleMusiquePersona() {
+    if (!personaMusiqueActive) {
+        personaMusique.volume = 0.5;
+        personaMusique.play();
+        personaMusiqueActive = true;
+        personaBtn.textContent = "Désactiver musique Persona";
+    } else {
+        personaMusique.pause();
+        personaMusiqueActive = false;
+        personaBtn.textContent = "Activer musique Persona";
+    }
+}
+</script>
+
+</body>
+</html>

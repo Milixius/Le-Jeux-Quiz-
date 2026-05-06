@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Persona 5 – Difficile</title>
+    <style>
+        #transitionScreen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 9999;
+}
+ /* Impact stylisé Persona 5 JAUNE/BLANC, petit et transparent */
+.p5-impact {
+    position: absolute;
+    width: 55px;      /* plus petit */
+    height: 55px;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.6;     /* plus transparent */
+    background: radial-gradient(white, rgba(255, 255, 0, 0.7));
+    filter: drop-shadow(0 0 8px rgba(255, 255, 0, 0.8));
+
+    /* Forme irrégulière style explosion */
+    clip-path: polygon(
+        50% 0%,
+        70% 12%,
+        100% 25%,
+        75% 42%,
+        90% 70%,
+        60% 55%,
+        50% 100%,
+        40% 55%,
+        10% 70%,
+        25% 42%,
+        0% 25%,
+        30% 12%
+    );
+
+    animation: p5ImpactAnim 0.35s ease-out forwards;
+}
+
+@keyframes p5ImpactAnim {
+    0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 0.6;
+    }
+    60% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* Fissure stylisée */
+.p5-crack {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.9;
+
+    background: url("c:/Users/Maxime/Pictures/fissure_clique.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    animation: crackFade 0.45s ease-out forwards;
+}
+
+@keyframes crackFade {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.3); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Flash blanc rapide */
+.p5-flash {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+    animation: flashAnim 0.15s ease-out forwards;
+}
+
+@keyframes flashAnim {
+    0% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.5); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
+}
+
+     body {
+        background: url("c:/Users/Maxime/Pictures/fond_quiz_Persona5_difficile.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        color: #fff;
+    }
+
+        .container {
+            background: rgba(0,0,0,0.7);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 900px;
+            margin: auto;
+            border: 2px solid #ff0000;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #ff0000;
+            text-shadow:
+                -2px -2px 0 black,
+                 2px -2px 0 black,
+                -2px  2px 0 black,
+                 2px  2px 0 black;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #ff0000;
+        }
+
+        .question p {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin: 3px 0;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #ff0000;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #resultat {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: #ff0000;
+        }
+
+        #details {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #fff;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+    <div id="transitionScreen"></div>
+<audio id="p5Sound" src="c:\Users\Maxime\Music\click_persona5.mp3" preload="auto"></audio>
+<audio id="transitionSound" src="c:\Users\Maxime\Music\sons_transition.mp3" preload="auto"></audio>
+<div class="container">
+    <h1>Quiz Persona 5 – Difficile</h1>
+
+    <!-- BOUTON MUSIQUE -->
+    <button id="toggleMusique" onclick="toggleMusique()">Désactiver la musique</button>
+
+    <!-- BOUTON RETOUR ACCUEIL -->
+    <button onclick="transitionAccueil()">Retour à l'accueil</button>
+
+    <!-- MUSIQUE AUTOMATIQUE -->
+    <audio id="musiqueQuiz" src="c:/Users/Maxime/Music/music_quiz_persona5_DIFFICILE.mp3" loop autoplay></audio>
+
+    <form id="quiz">
+
+<div class="question">
+    <p>1. Quel Persona de Joker possède naturellement la compétence “Ailment Boost” ?</p>
+    <label><input type="radio" name="q1" value="A"> A. Arsène</label>
+    <label><input type="radio" name="q1" value="B"> B. Mandragore</label>
+    <label><input type="radio" name="q1" value="C"> C. Incubus</label>
+    <label><input type="radio" name="q1" value="D"> D. Mokoi</label>
+</div>
+
+
+        <div class="question">
+            <p>2. Quel est le nom canon de Joker dans l’anime Persona 5 ?</p>
+            <label><input type="radio" name="q2" value="A"> A. Akira Kurusu</label>
+            <label><input type="radio" name="q2" value="B"> B. Ren Amamiya</label>
+            <label><input type="radio" name="q2" value="C"> C. Yu Narukami</label>
+            <label><input type="radio" name="q2" value="D"> D. Makoto Yuki</label>
+        </div>
+
+        <div class="question">
+            <p>3. Quelles est la seul fille avec qui ont ne peux pas sortir avec dans ces proposition ?</p>
+            <label><input type="radio" name="q3" value="A"> A. Makoto</label>
+            <label><input type="radio" name="q3" value="B"> B. Hifumi</label>
+            <label><input type="radio" name="q3" value="C"> C. Kawakami</label>
+            <label><input type="radio" name="q3" value="D"> D. Ann</label>
+        </div>
+
+        <div class="question">
+            <p>4. Quel est le rôle réel d’Igor dans Persona 5 (version de base) ?</p>
+            <label><input type="radio" name="q4" value="A"> A. Véritable maître du Velvet Room</label>
+            <label><input type="radio" name="q4" value="B"> B. Avatar de Yaldabaoth</label>
+            <label><input type="radio" name="q4" value="C"> C. Narrateur</label>
+            <label><input type="radio" name="q4" value="D"> D. Ancien voleur fantôme</label>
+        </div>
+
+        <div class="question">
+            <p>5. Qui est le véritable cerveau derrière les événements de Persona 5 (version de base) ?</p>
+            <label><input type="radio" name="q5" value="A"> A. Akechi</label>
+            <label><input type="radio" name="q5" value="B"> B. Shido</label>
+            <label><input type="radio" name="q5" value="C"> C. Yaldabaoth</label>
+            <label><input type="radio" name="q5" value="D"> D. Maruki</label>
+        </div>
+
+        <div class="question">
+            <p>6. Quel est le thème du Palace de Futaba Sakura ?</p>
+            <label><input type="radio" name="q6" value="A"> A. Casino</label>
+            <label><input type="radio" name="q6" value="B"> B. Musée</label>
+            <label><input type="radio" name="q6" value="C"> C. Tombeau/Pyramide</label>
+            <label><input type="radio" name="q6" value="D"> D. Laboratoire</label>
+        </div>
+
+        <div class="question">
+            <p>7. Quel est le Persona ultime de Joker dans Persona 5 (hors Royal) ?</p>
+            <label><input type="radio" name="q7" value="A"> A. Arsène</label>
+            <label><input type="radio" name="q7" value="B"> B. Messiah</label>
+            <label><input type="radio" name="q7" value="C"> C. Raoul</label>
+            <label><input type="radio" name="q7" value="D"> D. Satanael</label>
+        </div>
+
+        <div class="question">
+            <p>8. Qui rejoint officiellement les Voleurs Fantômes en dernier dans Persona 5 (version de base) ?</p>
+            <label><input type="radio" name="q8" value="A"> A. Futaba</label>
+            <label><input type="radio" name="q8" value="B"> B. Haru</label>
+            <label><input type="radio" name="q8" value="C"> C. Akechi</label>
+            <label><input type="radio" name="q8" value="D"> D. Morgana</label>
+        </div>
+
+        <div class="question">
+            <p>9. Qui interprète la majorité des chansons vocales de Persona 5 ?</p>
+            <label><input type="radio" name="q9" value="A"> A. Lyn</label>
+            <label><input type="radio" name="q9" value="B"> B. Lotus Juice</label>
+            <label><input type="radio" name="q9" value="C"> C. Shoji Meguro</label>
+            <label><input type="radio" name="q9" value="D"> D. Bravely Sound Team</label>
+        </div>
+
+        <div class="question">
+            <p>10. Quel Confidant améliore les bonus d’XP et les fusions de Persona ?</p>
+            <label><input type="radio" name="q10" value="A"> A. Justine & Caroline </label>
+            <label><input type="radio" name="q10" value="B"> B. Igor </label>
+            <label><input type="radio" name="q10" value="C"> C. Chihaya </label>
+            <label><input type="radio" name="q10" value="D"> D. Hifumi </label>
+        </div>
+
+        <button type="button" onclick="corriger()">Valider le quiz</button>
+    </form>
+
+    <div id="resultat"></div>
+    <div id="details"></div>
+</div>
+
+<script>
+    /* -------------------------
+       MUSIQUE
+    -------------------------- */
+
+    const audio = document.getElementById("musiqueQuiz");
+    const boutonMusique = document.getElementById("toggleMusique");
+    let musiqueActive = true;
+
+    window.addEventListener("load", () => {
+        audio.volume = 0.5;
+        audio.play().catch(() => {
+            musiqueActive = false;
+            boutonMusique.textContent = "Activer la musique";
+        });
+    });
+
+    function toggleMusique() {
+        if (musiqueActive) {
+            audio.pause();
+            musiqueActive = false;
+            boutonMusique.textContent = "Activer la musique";
+        } else {
+            audio.play();
+            musiqueActive = true;
+            boutonMusique.textContent = "Désactiver la musique";
+        }
+    }
+
+    /* -------------------------
+       CORRECTION DU QUIZ
+    -------------------------- */
+
+    const bonnesReponses = {
+        q1: "B",
+        q2: "B",
+        q3: "C",
+        q4: "B",
+        q5: "C",
+        q6: "C",
+        q7: "D",
+        q8: "B",
+        q9: "A",
+        q10:"C"
+    };
+
+    function corriger() {
+        let score = 0;
+        let total = Object.keys(bonnesReponses).length;
+        let details = "";
+
+        for (const q in bonnesReponses) {
+            const radios = document.querySelectorAll(`input[name="${q}"]`);
+            let reponse = null;
+            radios.forEach(r => { if (r.checked) reponse = r.value; });
+
+            if (reponse === bonnesReponses[q]) {
+                score++;
+                details += q.toUpperCase() + " : ✅ Bonne réponse\n";
+            } else if (reponse === null) {
+                details += q.toUpperCase() + " : ❓ Aucune réponse (bonne : " + bonnesReponses[q] + ")\n";
+            } else {
+                details += q.toUpperCase() + " : ❌ Mauvaise réponse (tu as mis " + reponse + ", bonne : " + bonnesReponses[q] + ")\n";
+            }
+        }
+
+        document.getElementById("resultat").textContent = "Score : " + score + " / " + total;
+        document.getElementById("details").textContent = details;
+
+        const boutonValider = document.querySelector('button[onclick="corriger()"]');
+        boutonValider.disabled = true;
+        boutonValider.style.background = "#777";
+        boutonValider.style.cursor = "not-allowed";
+        boutonValider.textContent = "Validation effectuée";
+    }
+</script>
+<script>
+document.addEventListener("click", function(e) {
+
+    // --- SON ---
+    let s = document.getElementById("p5Sound").cloneNode(true);
+    s.volume = 0.19;
+    s.play();
+
+    // --- IMPACT ROUGE PERSONA ---
+    let impact = document.createElement("div");
+    impact.classList.add("p5-impact");
+    impact.style.left = e.pageX + "px";
+    impact.style.top = e.pageY + "px";
+    document.body.appendChild(impact);
+
+    // --- FISSURE CARTOON ---
+    let crack = document.createElement("div");
+    crack.classList.add("p5-crack");
+    crack.style.left = e.pageX + "px";
+    crack.style.top = e.pageY + "px";
+    document.body.appendChild(crack);
+
+    // --- FLASH ---
+    let flash = document.createElement("div");
+    flash.classList.add("p5-flash");
+    flash.style.left = e.pageX + "px";
+    flash.style.top = e.pageY + "px";
+    document.body.appendChild(flash);
+
+    // Nettoyage
+    setTimeout(() => impact.remove(), 350);
+    setTimeout(() => crack.remove(), 450);
+    setTimeout(() => flash.remove(), 150);
+});
+</script>
+<script>
+function transitionAccueil() {
+
+    // Son de transition
+    let s = document.getElementById("transitionSound").cloneNode(true);
+    s.volume = 0.25;
+    s.play();
+
+    // Animation de fondu noir
+    const screen = document.getElementById("transitionScreen");
+    screen.style.opacity = "1";
+
+    // Attendre la fin de l'animation avant de changer de page
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 600); // même durée que la transition CSS
+}
+</script>
+
+</body>
+</html>

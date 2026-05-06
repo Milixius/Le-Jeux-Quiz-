@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Yokai-Watch - Facile</title>
+
+    <style>
+#toggleMusique {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+
+    background: linear-gradient(135deg, #ff3b3b, #0066ff);
+    box-shadow: 0 0 15px rgba(255, 80, 80, 0.7),
+                0 0 15px rgba(80, 140, 255, 0.7);
+
+    transition: 0.25s ease;
+    z-index: 9999;
+}
+
+#toggleMusique:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #ff5555, #1a7bff);
+    box-shadow: 0 0 20px rgba(255, 100, 100, 0.9),
+                0 0 20px rgba(100, 160, 255, 0.9);
+}
+
+#toggleMusique:active {
+    transform: scale(0.95);
+}
+        body {
+            background: url("c:/Users/Maxime/Pictures/fond quiz-yokai-watch.png") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.25);
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #resultat {
+            text-align: center;
+            font-size: 22px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #btnAccueil {
+            background: #2196F3;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="toggleMusique" onclick="toggleMusique()">Activer la musique</button>
+
+<audio id="musiqueQuiz" src="c:\Users\Maxime\Music\musique_fond_yokaiwatch_facile.mp3" loop preload="auto"></audio>
+<audio id="transitionSound" src="sons_transition.mp3" preload="auto"></audio>
+<div id="transitionScreen"></div>
+
+    <div class="container">
+        <h1>Quiz Yokai-Watch - Niveau Facile</h1>
+
+        <form id="quizForm">
+
+            <!-- QUESTION 1 -->
+            <div class="question">
+                <p>1. (Qui est le tout premier Yo-kai a nous offrir son médaillon dans le premier jeux ?)</p>
+                <label><input type="radio" name="q1" value="A"> Flamente</label><br>
+                <label><input type="radio" name="q1" value="B"> Cigalopin</label><br>
+                <label><input type="radio" name="q1" value="C"> Jibanyan</label>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="question">
+                <p>2. (De qui est amoureux Natan ?)</p>
+                <label><input type="radio" name="q2" value="A"> Kathie</label><br>
+                <label><input type="radio" name="q2" value="B"> Lucie</label><br>
+                <label><input type="radio" name="q2" value="C"> Maya</label>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="question">
+                <p>3. (De quel tribu appatien Jibanyan ?)</p>
+                <label><input type="radio" name="q3" value="A"> Les sinistre</label><br>
+                <label><input type="radio" name="q3" value="B"> Les mystérieux</label><br>
+                <label><input type="radio" name="q3" value="C"> Les mignon</label>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <div class="question">
+                <p>4. (Comment s'appelle le Yokai nous sauvant de Tryptik et Gargaros dans le premier jeux ?)</p>
+                <label><input type="radio" name="q4" value="A"> Kyubi</label><br>
+                <label><input type="radio" name="q4" value="B"> Octorgone</label><br>
+                <label><input type="radio" name="q4" value="C"> Sire Dragon</label>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <div class="question">
+                <p>5. (C'est quoi la nourriture préféré de Jibanyan dans le 1 ?)</p>
+                <label><input type="radio" name="q5" value="A"> Les ramens</label><br>
+                <label><input type="radio" name="q5" value="B"> Les bonbons</label><br>
+                <label><input type="radio" name="q5" value="C"> Le poisson</label>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <div class="question">
+                <p>6. (Quel est le nom de la fusion entre Loubarbard et Jibanyan ?)</p>
+                <label><input type="radio" name="q6" value="A"> Bandinyan</label><br>
+                <label><input type="radio" name="q6" value="B"> Loubarnyan</label><br>
+                <label><input type="radio" name="q6" value="C"> Jipernyan</label>
+            </div>
+
+            <!-- QUESTION 7 -->
+            <div class="question">
+                <p>7. (Qui est le boss final des Limbe éternel ?)</p>
+                <label><input type="radio" name="q7" value="A"> Poteaufeu</label><br>
+                <label><input type="radio" name="q7" value="B"> Ratgoutant</label><br>
+                <label><input type="radio" name="q7" value="C"> Potifeu</label>
+            </div>
+
+            <!-- QUESTION 8 -->
+            <div class="question">
+                <p>8. (Quel est le nom du boss final du premier jeux ?)</p>
+                <label><input type="radio" name="q8" value="A"> Mac-Poulpe</label><br>
+                <label><input type="radio" name="q8" value="B"> Mac-Kraken</label><br>
+                <label><input type="radio" name="q8" value="C"> Mac-Tentacule</label>
+            </div>
+
+            <!-- QUESTION 9 -->
+            <div class="question">
+                <p>9. (Lequel de ces Yo-kai n'as pas un légendaire qui lui ressemble ?)</p>
+                <label><input type="radio" name="q9" value="A"> Corniot</label><br>
+                <label><input type="radio" name="q9" value="B"> Flamente</label><br>
+                <label><input type="radio" name="q9" value="C"> Jibanyan</label>
+            </div>
+
+            <!-- QUESTION 10 -->
+            <div class="question">
+                <p>10. (Qui est le meilleurs Yo-kai pour envouté dans le premier jeu ?)</p>
+                <label><input type="radio" name="q10" value="A"> Markonito</label><br>
+                <label><input type="radio" name="q10" value="B"> Malmidal</label><br>
+                <label><input type="radio" name="q10" value="C"> Maltesse</label>
+            </div>
+
+            <button type="button" onclick="corriger()" id="btnValider">Valider mes réponses</button>
+
+        </form>
+
+        <button onclick="transitionAccueil()">Retour à l'accueil</button>
+
+
+        <div id="resultat"></div>
+
+    </div>
+
+<script>
+    function corriger() {
+        let bonnesReponses = {
+            q1: "B",
+            q2: "A",
+            q3: "C",
+            q4: "B",
+            q5: "C",
+            q6: "A",
+            q7: "A",
+            q8: "B",
+            q9: "B",
+            q10: "C"
+        };
+
+        let score = 0;
+
+        for (let q in bonnesReponses) {
+            let choix = document.querySelector('input[name="'+q+'"]:checked');
+            if (choix && choix.value === bonnesReponses[q]) {
+                score++;
+            }
+        }
+
+        document.getElementById("resultat").innerHTML =
+            "Tu as obtenu " + score + " / 10";
+
+        // Désactive et grise le bouton Valider
+        let btn = document.getElementById("btnValider");
+        btn.disabled = true;
+        btn.style.background = "#777";
+        btn.style.cursor = "not-allowed";
+
+        // Affiche le bouton retour
+        let accueil = document.getElementById("btnAccueil");
+        accueil.style.display = "block";
+        accueil.onclick = function() {
+            window.location.href = "file:///C:/Users/Maxime/Desktop/dossier.html/index.html";
+        };
+    }
+</script>
+<script>
+function transitionAccueil() {
+
+    // Son de transition
+    let s = document.getElementById("transitionSound").cloneNode(true);
+    s.volume = 0.25;
+    s.play();
+
+    // Animation de fondu noir
+    const screen = document.getElementById("transitionScreen");
+    screen.style.opacity = "1";
+
+    // Attendre la fin de l'animation avant de changer de page
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 600); // même durée que la transition CSS
+}
+</script>
+<script>
+let musiqueActive = false;
+const musique = document.getElementById("musiqueQuiz");
+const boutonMusique = document.getElementById("toggleMusique");
+
+function toggleMusique() {
+    if (!musiqueActive) {
+        musique.volume = 0.4;
+        musique.play();
+        musiqueActive = true;
+        boutonMusique.textContent = "Désactiver la musique";
+    } else {
+        musique.pause();
+        musiqueActive = false;
+        boutonMusique.textContent = "Activer la musique";
+    }
+}
+</script>
+</body>
+</html>

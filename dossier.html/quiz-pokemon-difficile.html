@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Pokémon Difficile</title>
+   <style>
+    /* Écran noir pour transition */
+#transitionScreen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 9999;
+}
+
+    /* --- CERCLE DE BASE --- */
+.click-effect {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    animation: clickAnim 0.7s ease-out forwards;
+}
+
+@keyframes clickAnim {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(0.2); }
+    70% { opacity: 0.8; transform: translate(-50%, -50%) scale(2.5); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(4); }
+}
+
+/* --- PARTICULES --- */
+.particule {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: particuleAnim 0.6s ease-out forwards;
+}
+
+@keyframes particuleAnim {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.2); }
+}
+
+/* --- FEU 🔥 --- */
+.cercle-feu { border: 3px solid #ff5000; box-shadow: 0 0 25px #ff5000; }
+.particule-feu { background: #ff7800; box-shadow: 0 0 15px #ff5000; }
+
+/* --- ELECTRIQUE ⚡ --- */
+.cercle-electrique { border: 3px solid yellow; box-shadow: 0 0 30px yellow; }
+.particule-electrique { background: yellow; box-shadow: 0 0 20px yellow; }
+
+/* --- EAU 💧 --- */
+.cercle-eau { border: 3px solid #0096ff; box-shadow: 0 0 25px #0096ff; }
+.particule-eau { background: #00c8ff; box-shadow: 0 0 15px #0096ff; }
+
+/* --- PLANTE 🌿 --- */
+.cercle-plante { border: 3px solid #00c850; box-shadow: 0 0 25px #00c850; }
+.particule-plante { background: #00ff64; box-shadow: 0 0 15px #00c850; }
+
+/* --- VOL 🌪 (tourbillon) --- */
+.cercle-vol {
+    border: 3px solid white;
+    box-shadow: 0 0 30px white;
+    animation: spin 0.7s linear forwards;
+}
+@keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg) scale(0.2); }
+    to { transform: translate(-50%, -50%) rotate(360deg) scale(4); opacity: 0; }
+}
+.particule-vol {
+    background: white;
+    box-shadow: 0 0 15px white;
+}
+
+/* --- SPECTRE 💀 (ombre + distorsion) --- */
+.cercle-spectre {
+    border: 3px solid #6a00ff;
+    box-shadow: 0 0 40px #6a00ff;
+    filter: blur(1px);
+}
+.particule-spectre {
+    background: #9b4dff;
+    box-shadow: 0 0 20px #6a00ff;
+    filter: blur(1px);
+}
+
+/* --- GLACE 🧊 (cristaux) --- */
+.cercle-glace {
+    border: 3px solid #a8eaff;
+    box-shadow: 0 0 35px #a8eaff;
+}
+.particule-glace {
+    width: 12px;
+    height: 12px;
+    background: #d4f7ff;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    box-shadow: 0 0 20px #a8eaff;
+}
+
+/* --- DRAGON 🌩 (aura violette) --- */
+.cercle-dragon {
+    border: 3px solid #b300ff;
+    box-shadow: 0 0 40px #b300ff;
+}
+.particule-dragon {
+    background: #d966ff;
+    box-shadow: 0 0 25px #b300ff;
+}
+
+
+
+        body {
+            background: url("c:/Users/Maxime/Pictures/fond quiz-pokemon DIFFICILE.png") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.4);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 900px;
+            margin: auto;
+            backdrop-filter: blur(6px);
+        }
+
+h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: rgb(255, 238, 0); /* Jaune */
+
+    text-shadow:
+        /* Contour bleu (épais) */
+        -2px -2px 0 rgb(8, 0, 255),
+         2px -2px 0 rgb(8, 0, 255),
+        -2px  2px 0 rgb(8, 0, 255),
+         2px  2px 0 rgb(8, 0, 255),
+        -3px  0px 0 rgb(8, 0, 255),
+         3px  0px 0 rgb(8, 0, 255),
+         0px -3px 0 rgb(8, 0, 255),
+         0px  3px 0 rgb(8, 0, 255),
+
+        /* Aura noire */
+        0 0 20px #000,
+        0 0 40px #000,
+        0 0 60px #000,
+        0 0 80px #000,
+        0 0 100px #000;
+}
+
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.7);
+        }
+
+        .question p {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin: 3px 0;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #ff0000;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #resultat {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+        }
+
+        #details {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #fff;
+            white-space: pre-line;
+        }
+    </style>
+    
+</head>
+<body>
+<audio id="soundClick" src="c:\Users\Maxime\Music\sons_click.mp3" preload="auto"></audio>
+<div id="transitionScreen"></div>
+<audio id="transitionSound" src="sons_transition.mp3" preload="auto"></audio>
+
+<div class="container">
+    <h1>Quiz Yo-kai Watch – Difficile</h1>
+
+    <!-- BOUTON MUSIQUE -->
+    <button id="toggleMusique" onclick="toggleMusique()">Désactiver la musique</button>
+
+    <!-- BOUTON RETOUR ACCUEIL -->
+    <button onclick="transitionAccueil()">Retour à l'accueil</button>
+
+
+    <!-- MUSIQUE AUTOMATIQUE -->
+    <audio id="musiqueQuiz" src="c:/Users/Maxime/Music/musique_quiz_pokemon_difficile.mp3" loop autoplay></audio>
+
+    <form id="quiz">
+
+        <div class="question">
+            <p>1. Qui est le stateur de type eau avec le talent Protéeen ?</p>
+            <label><input type="radio" name="q1" value="A"> A. Aligatueur</label>
+            <label><input type="radio" name="q1" value="B"> B. Clamiral</label>
+            <label><input type="radio" name="q1" value="C"> C. Oratoria</label>
+            <label><input type="radio" name="q1" value="D"> D. Amphinobi</label>
+        </div>
+
+        <div class="question">
+            <p>2. Quel est la seul ultra-chimère a pouvoir évoluer ?</p>
+            <label><input type="radio" name="q2" value="A"> A. Engloutyran</label>
+            <label><input type="radio" name="q2" value="B"> B. Katagami</label>
+            <label><input type="radio" name="q2" value="C"> C. Vemini</label>
+            <label><input type="radio" name="q2" value="D"> D. Ama-Ama</label>
+        </div>
+
+        <div class="question">
+            <p>3. Pourquoi dans Pokemon Soleil et Lune les Ténéfix appelais des Strassi en renfos ?</p>
+            <label><input type="radio" name="q3" value="A"> A. Pour les manger</label>
+            <label><input type="radio" name="q3" value="B"> B. Pour avoir de l'aide</label>
+            <label><input type="radio" name="q3" value="C"> C. Pour embêté le joueur</label>
+            <label><input type="radio" name="q3" value="D"> D. Pour s'amuser</label>
+        </div>
+
+        <div class="question">
+            <p>4. pourquoi Sepiatroce n'était pas évident a obtenir ?</p>
+            <label><input type="radio" name="q4" value="A"> A. Car il est atroce</label>
+            <label><input type="radio" name="q4" value="B"> B. Il fallait jouer avec le consol a l'envers</label>
+            <label><input type="radio" name="q4" value="C"> C. Il falais gagner un combat en ne faisant que des coup critique</label>
+            <label><input type="radio" name="q4" value="D"> D. Il falais finir un combat et gagner un niveau en utilisant uniquement griffe ombre</label>
+        </div>
+
+        <div class="question">
+            <p>5. Pourquoi Volcanion est un pokémon special ?</p>
+            <label><input type="radio" name="q5" value="A"> A. C'est le seul a avoir un double type</label>
+            <label><input type="radio" name="q5" value="B"> B. C'est le seul a avoir des canon dans le dos</label>
+            <label><input type="radio" name="q5" value="C"> C. C'est le seul a vivre dans un volcan</label>
+            <label><input type="radio" name="q5" value="D"> D. C'est le seul légendaire rouge</label>
+        </div>
+
+        <div class="question">
+            <p>6. Quelle est le pokemon qui n'est pas dans l'équipe de Percuppio ?</p>
+            <label><input type="radio" name="q6" value="A"> A. Lucario</label>
+            <label><input type="radio" name="q6" value="B"> B. Carchacrok</label>
+            <label><input type="radio" name="q6" value="C"> C. Togekiss</label>
+            <label><input type="radio" name="q6" value="D"> D. Spiritombe</label>
+        </div>
+
+        <div class="question">
+            <p>7. Que fait un Gardevoir pour protégé son dresseur ?</p>
+            <label><input type="radio" name="q7" value="A"> A. Elle charme le pokémon advers</label>
+            <label><input type="radio" name="q7" value="B"> B. Elle envoie de grand et puissant coup psychique a son advers</label>
+            <label><input type="radio" name="q7" value="C"> C. Elle essaie de calmer son advers</label>
+            <label><input type="radio" name="q7" value="D"> D. Elle crée un mini trou noir</label>
+        </div>
+
+        <div class="question">
+            <p>8. Quel pokemon n'est pas une évolution de Débugang ?</p>
+            <label><input type="radio" name="q8" value="A"> A. Tygnon</label>
+            <label><input type="radio" name="q8" value="B"> B. Kicklee</label>
+            <label><input type="radio" name="q8" value="C"> C. Judocrack</label>
+            <label><input type="radio" name="q8" value="D"> D. Kapoèra</label>
+        </div>
+
+        <div class="question">
+            <p>9. Quel pokemon légendaire n'est PAS une monture?</p>
+            <label><input type="radio" name="q9" value="A"> A. Heatran</label>
+            <label><input type="radio" name="q9" value="B"> B. Lunala</label>
+            <label><input type="radio" name="q9" value="C"> C. Koraidon</label>
+            <label><input type="radio" name="q9" value="D"> D. Latios</label>
+        </div>
+
+        <div class="question">
+            <p>10. Combien Dracolosse possède Peeter ?</p>
+            <label><input type="radio" name="q10" value="A"> A. 1 c'est son goat</label>
+            <label><input type="radio" name="q10" value="B"> B. 3 ça fais beaucoup là non ?</label>
+            <label><input type="radio" name="q10" value="C"> C. 4 il as abusé</label>
+            <label><input type="radio" name="q10" value="D"> D. 6 il as que de ça</label>
+        </div>
+
+        <button type="button" onclick="corriger()">Valider le quiz</button>
+    </form>
+
+    <div id="resultat"></div>
+    <div id="details"></div>
+</div>
+
+<script>
+    // --- SCRIPT MUSIQUE ---
+    const audio = document.getElementById("musiqueQuiz");
+    const boutonMusique = document.getElementById("toggleMusique");
+    let musiqueActive = true;
+
+    window.addEventListener("load", () => {
+        audio.volume = 0.4;
+        audio.play().catch(() => {
+            musiqueActive = false;
+            boutonMusique.textContent = "Activer la musique";
+        });
+    });
+
+    function toggleMusique() {
+        if (musiqueActive) {
+            audio.pause();
+            musiqueActive = false;
+            boutonMusique.textContent = "Activer la musique";
+        } else {
+            audio.play();
+            musiqueActive = true;
+            boutonMusique.textContent = "Désactiver la musique";
+        }
+    }
+
+    // --- SCRIPT CORRECTION QUIZ ---
+    const bonnesReponses = {
+        q1: "D",
+        q2: "C",
+        q3: "A",
+        q4: "B",
+        q5: "A",
+        q6: "A",
+        q7: "D",
+        q8: "C",
+        q9: "A",
+        q10:"B"
+    };
+
+    function corriger() {
+        let score = 0;
+        let total = Object.keys(bonnesReponses).length;
+        let details = "";
+
+        for (const q in bonnesReponses) {
+            const radios = document.querySelectorAll(`input[name="${q}"]`);
+            let reponse = null;
+            radios.forEach(r => { if (r.checked) reponse = r.value; });
+
+            if (reponse === bonnesReponses[q]) {
+                score++;
+                details += q.toUpperCase() + " : ✅ Bonne réponse\n";
+            } else if (reponse === null) {
+                details += q.toUpperCase() + " : ❓ Aucune réponse (bonne : " + bonnesReponses[q] + ")\n";
+            } else {
+                details += q.toUpperCase() + " : ❌ Mauvaise réponse (tu as mis " + reponse + ", bonne : " + bonnesReponses[q] + ")\n";
+            }
+        }
+
+        document.getElementById("resultat").textContent = "Score : " + score + " / " + total;
+        document.getElementById("details").textContent = details;
+
+        const boutonValider = document.querySelector('button[onclick="corriger()"]');
+        boutonValider.disabled = true;
+        boutonValider.style.background = "#777";
+        boutonValider.style.cursor = "not-allowed";
+        boutonValider.textContent = "Validation effectuée";
+    }
+    
+</script>
+<script>
+document.addEventListener("click", function(e) {
+    // --- LECTURE DU SON ---
+let s = document.getElementById("soundClick").cloneNode(true);
+s.volume = 0.19; 
+s.play();
+
+    const elements = [
+        "feu",
+        "electrique",
+        "eau",
+        "plante",
+        "vol",
+        "spectre",
+        "glace",
+        "dragon"
+    ];
+
+    let type = elements[Math.floor(Math.random() * elements.length)];
+
+    /* --- CERCLE PRINCIPAL --- */
+    let circle = document.createElement("div");
+    circle.classList.add("click-effect", "cercle-" + type);
+    circle.style.left = e.pageX + "px";
+    circle.style.top = e.pageY + "px";
+    document.body.appendChild(circle);
+
+    /* --- PARTICULES --- */
+    for (let i = 0; i < 14; i++) {
+        let p = document.createElement("div");
+        p.classList.add("particule", "particule-" + type);
+
+        p.style.left = e.pageX + "px";
+        p.style.top = e.pageY + "px";
+
+        let angle = Math.random() * 2 * Math.PI;
+        let distance = 40 + Math.random() * 60;
+
+        p.style.setProperty("--dx", Math.cos(angle) * distance + "px");
+        p.style.setProperty("--dy", Math.sin(angle) * distance + "px");
+
+        document.body.appendChild(p);
+
+        setTimeout(() => p.remove(), 600);
+    }
+
+    setTimeout(() => circle.remove(), 700);
+});
+</script>
+
+<script>
+function transitionAccueil() {
+
+    // Son de transition
+    let s = document.getElementById("transitionSound").cloneNode(true);
+    s.volume = 0.25;
+    s.play();
+
+    // Animation de fondu noir
+    const screen = document.getElementById("transitionScreen");
+    screen.style.opacity = "1";
+
+    // Attendre la fin de l'animation avant de changer de page
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 600); // même durée que la transition CSS
+}
+</script>
+
+</body>
+</html>

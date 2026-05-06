@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Pokémon - Facile</title>
+
+    <style>
+        /* Écran noir pour transition */
+#transitionScreen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+    z-index: 9999;
+}
+
+        body {
+            background: url("c:/Users/Maxime/Pictures/fond quiz-pokemon.png") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.25);
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #resultat {
+            text-align: center;
+            font-size: 22px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .boutons-fin {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        #btnAccueil {
+            background: #2196F3;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            display: none;
+        }
+
+        #btnAccueil:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+<div id="transitionScreen"></div>
+<audio id="transitionSound" src="sons_transition.mp3" preload="auto"></audio>
+
+    <div class="container">
+        <h1>Quiz Pokémon - Niveau Facile</h1>
+
+        <form id="quizForm">
+
+            <!-- QUESTION 1 -->
+            <div class="question">
+                <p>1. (Qui est le starter de type feu de la première génération ?)</p>
+                <label><input type="radio" name="q1" value="A"> Salamèche</label><br>
+                <label><input type="radio" name="q1" value="B"> Héricendre</label><br>
+                <label><input type="radio" name="q1" value="C"> Poussifeu</label>
+            </div>
+
+            <!-- QUESTION 2 -->
+            <div class="question">
+                <p>2. (Quel est le 3ème type du trio élémentaire avec l'eau et le feu ?)</p>
+                <label><input type="radio" name="q2" value="A"> La roche</label><br>
+                <label><input type="radio" name="q2" value="B"> La plante</label><br>
+                <label><input type="radio" name="q2" value="C"> L'électricité</label>
+            </div>
+
+            <!-- QUESTION 3 -->
+            <div class="question">
+                <p>3. (Comment s'écris le nom du pokémon le plus connu ?)</p>
+                <label><input type="radio" name="q3" value="A"> Picashu</label><br>
+                <label><input type="radio" name="q3" value="B"> Pikachu</label><br>
+                <label><input type="radio" name="q3" value="C"> Picashu</label>
+            </div>
+
+            <!-- QUESTION 4 -->
+            <div class="question">
+                <p>4. (Qui est le premier Champion que l'ont affronte dans le premier jeu ?)</p>
+                <label><input type="radio" name="q4" value="A"> Pierre</label><br>
+                <label><input type="radio" name="q4" value="B"> Roche</label><br>
+                <label><input type="radio" name="q4" value="C"> Caillou</label>
+            </div>
+
+            <!-- QUESTION 5 -->
+            <div class="question">
+                <p>5. (qui est la dresseuse la plus crainte des jeux ?)</p>
+                <label><input type="radio" name="q5" value="A"> Pepper</label><br>
+                <label><input type="radio" name="q5" value="B"> Tarak</label><br>
+                <label><input type="radio" name="q5" value="C"> Cynthia</label>
+            </div>
+
+            <!-- QUESTION 6 -->
+            <div class="question">
+                <p>6. (Lequel de ces type n'as pas de faiblesse contre lui même ?)</p>
+                <label><input type="radio" name="q6" value="A"> Spectre</label><br>
+                <label><input type="radio" name="q6" value="B"> Dragon</label><br>
+                <label><input type="radio" name="q6" value="C"> Fée</label>
+            </div>
+
+            <!-- QUESTION 7 -->
+            <div class="question">
+                <p>7. (Quel est le point commun entre Latios et Latias ?)</p>
+                <label><input type="radio" name="q7" value="A"> Leurs types</label><br>
+                <label><input type="radio" name="q7" value="B"> Leurs couleurs</label><br>
+                <label><input type="radio" name="q7" value="C"> Leurs pouvoirs</label>
+            </div>
+
+            <!-- QUESTION 8 -->
+            <div class="question">
+                <p>8. (D'où Mewtwo viens ?)</p>
+                <label><input type="radio" name="q8" value="A"> S'est un clone raté de Mew</label><br>
+                <label><input type="radio" name="q8" value="B"> Il a été crée dans un laboratoire</label><br>
+                <label><input type="radio" name="q8" value="C"> Il est tout simplement apparue par magie</label>
+            </div>
+
+            <!-- QUESTION 9 -->
+            <div class="question">
+                <p>9. (Quelle double type n'existe pas ?)</p>
+                <label><input type="radio" name="q9" value="A"> Fée et spectre</label><br>
+                <label><input type="radio" name="q9" value="B"> Roche et Sol</label><br>
+                <label><input type="radio" name="q9" value="C"> Dragon et insecte</label>
+            </div>
+
+            <!-- QUESTION 10 -->
+            <div class="question">
+                <p>10. (As tu aimer se quiz simple ?)</p>
+                <label><input type="radio" name="q10" value="A"> Ouais s'était corecte</label><br>
+                <label><input type="radio" name="q10" value="B"> Oui j'ai adoré se quizz</label><br>
+                <label><input type="radio" name="q10" value="C"> Non j'ai pas aimé voir détesté</label>
+            </div>
+
+            <div class="boutons-fin">
+                <button type="button" onclick="corriger()" id="btnValider">Valider mes réponses</button>
+
+<button onclick="transitionAccueil()">Retour à l'accueil</button>
+
+            </div>
+
+        </form>
+
+        <div id="resultat"></div>
+
+    </div>
+
+<script>
+    function corriger() {
+        let bonnesReponses = {
+            q1: "A",
+            q2: "B",
+            q3: "B",
+            q4: "A",
+            q5: "C",
+            q6: "C",
+            q7: "A",
+            q8: "B",
+            q9: "C",
+            q10: "B"
+        };
+
+        let score = 0;
+
+        for (let q in bonnesReponses) {
+            let choix = document.querySelector('input[name="'+q+'"]:checked');
+            if (choix && choix.value === bonnesReponses[q]) {
+                score++;
+            }
+        }
+
+        document.getElementById("resultat").innerHTML =
+            "Tu as obtenu " + score + " / 10";
+
+        // Désactive et grise le bouton Valider
+        let btn = document.getElementById("btnValider");
+        btn.disabled = true;
+        btn.style.background = "#777";
+        btn.style.cursor = "not-allowed";
+
+        // Affiche le bouton retour
+        let accueil = document.getElementById("btnAccueil");
+        accueil.style.display = "block";
+        accueil.onclick = function() {
+            window.location.href = "file:///C:/Users/Maxime/Desktop/dossier.html/index.html";
+        };
+    }
+</script>
+<script>
+function transitionAccueil() {
+
+    // Son de transition
+    let s = document.getElementById("transitionSound").cloneNode(true);
+    s.volume = 0.25;
+    s.play();
+
+    // Animation de fondu noir
+    const screen = document.getElementById("transitionScreen");
+    screen.style.opacity = "1";
+
+    // Attendre la fin de l'animation avant de changer de page
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 600); // même durée que la transition CSS
+}
+</script>
+
+</body>
+</html>

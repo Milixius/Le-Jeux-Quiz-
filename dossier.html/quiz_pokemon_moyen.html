@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quiz Pokémon – Moyen</title>
+
+<style>
+    body {
+        background: url("c:/Users/Maxime/Pictures/fond_quiz_pokemon_moyen.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        color: white;
+        text-shadow: 1px 1px 0 black;
+    }
+
+    .container {
+        background: rgba(0,0,0,0.6);
+        padding: 25px;
+        border-radius: 15px;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        color: #ffcb05;
+        font-size: 40px;
+    }
+
+    .question {
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+    #btnValider {
+        padding: 12px 25px;
+        font-size: 20px;
+        background: #ffcb05;
+        border: none;
+        border-radius: 10px;
+        color: black;
+        cursor: pointer;
+        transition: 0.3s;
+        display: block;
+        margin: 20px auto;
+    }
+
+    #btnValider:hover {
+        transform: scale(1.05);
+    }
+
+    .bouton-retour {
+        padding: 12px 25px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #ff0000, #000000);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+
+        box-shadow: 0 0 12px rgba(255,0,0,0.7),
+                    0 0 12px rgba(0,0,0,0.8);
+        transition: 0.25s ease;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .bouton-retour:hover {
+        transform: scale(1.1);
+    }
+
+    /* Bouton musique Pokémon */
+    #musiquePokemonBtn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+
+        padding: 12px 25px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #ff0000, #000000);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+
+        box-shadow: 0 0 12px rgba(255,0,0,0.7),
+                    0 0 12px rgba(0,0,0,0.8);
+        transition: 0.25s ease;
+        z-index: 9999;
+    }
+
+    #musiquePokemonBtn:hover {
+        transform: scale(1.1);
+    }
+
+    /* Écran noir transition */
+    #transitionScreen {
+        position: fixed;
+        inset: 0;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.6s ease;
+        z-index: 99999;
+    }
+
+    #resultat {
+        margin-top: 20px;
+        font-size: 24px;
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+
+<button id="musiquePokemonBtn" onclick="toggleMusique()">Activer musique</button>
+<audio id="musiquePokemon" src="c:\Users\Maxime\Music\musique_quiz_pokemon_moyen.mp3" loop preload="auto"></audio>
+
+<audio id="transitionSound" src="sons_transition.mp3" preload="auto"></audio>
+<div id="transitionScreen"></div>
+
+<div class="container">
+
+    <h1>Quiz Pokémon – Niveau Moyen</h1>
+
+    <form id="quiz">
+
+        <!-- Q1 — BONNE RÉPONSE : C -->
+        <div class="question">
+            1. Quel Pokémon est le numéro 150 du Pokédex National ?
+            <br>
+            <input type="radio" name="q1" value="A"> Sulfura<br>
+            <input type="radio" name="q1" value="B"> Artikodin<br>
+            <input type="radio" name="q1" value="C"> Mewtwo<br>
+        </div>
+
+        <!-- Q2 — BONNE RÉPONSE : A -->
+        <div class="question">
+            2. Quel type est super efficace contre le type Roche ?
+            <br>
+            <input type="radio" name="q2" value="A"> Eau<br>
+            <input type="radio" name="q2" value="B"> Plante<br>
+            <input type="radio" name="q2" value="C"> Poison<br>
+        </div>
+
+        <!-- Q3 — BONNE RÉPONSE : B -->
+        <div class="question">
+            3. Quel Pokémon évolue en Noctali ?
+            <br>
+            <input type="radio" name="q3" value="A"> Togepi<br>
+            <input type="radio" name="q3" value="B"> Évoli<br>
+            <input type="radio" name="q3" value="C"> Pichu<br>
+        </div>
+
+        <!-- Q4 — BONNE RÉPONSE : C -->
+        <div class="question">
+            4. Quel Pokémon est la mascotte de la Team Rocket ?
+            <br>
+            <input type="radio" name="q4" value="A"> Arbok<br>
+            <input type="radio" name="q4" value="B"> Smogo<br>
+            <input type="radio" name="q4" value="C"> Miaouss<br>
+        </div>
+
+        <!-- Q5 — BONNE RÉPONSE : A -->
+        <div class="question">
+            5. Quel Pokémon est de type Électrik ?
+            <br>
+            <input type="radio" name="q5" value="A"> Raichu<br>
+            <input type="radio" name="q5" value="B"> Lokhlass<br>
+            <input type="radio" name="q5" value="C"> Rhinocorne<br>
+        </div>
+
+        <!-- Q6 — BONNE RÉPONSE : C -->
+        <div class="question">
+            6. Quel Pokémon est de type Eau/Glace ?
+            <br>
+            <input type="radio" name="q6" value="A"> Léviator<br>
+            <input type="radio" name="q6" value="B"> Pingoléon<br>
+            <input type="radio" name="q6" value="C"> Lokhlass<br>
+        </div>
+
+        <!-- Q7 — BONNE RÉPONSE : B -->
+        <div class="question">
+            7. Quel Pokémon possède la capacité spéciale “Sécheresse” ?
+            <br>
+            <input type="radio" name="q7" value="A"> Dracaufeu<br>
+            <input type="radio" name="q7" value="B"> Feunard<br>
+            <input type="radio" name="q7" value="C"> Groudon<br>
+        </div>
+
+        <!-- Q8 — BONNE RÉPONSE : C -->
+        <div class="question">
+            8. Machopeur évolue en :
+            <br>
+            <input type="radio" name="q8" value="A"> Machoc<br>
+            <input type="radio" name="q8" value="B"> Il n’évolue pas<br>
+            <input type="radio" name="q8" value="C"> Mackogneur<br>
+        </div>
+
+        <!-- Q9 — BONNE RÉPONSE : A -->
+        <div class="question">
+            9. Quel Pokémon fossile appartient à la 1ère génération ?
+            <br>
+            <input type="radio" name="q9" value="A"> Amonita<br>
+            <input type="radio" name="q9" value="B"> Dinoclier<br>
+            <input type="radio" name="q9" value="C"> Ptyranidur<br>
+        </div>
+
+        <!-- Q10 — BONNE RÉPONSE : B -->
+        <div class="question">
+            10. Quel Pokémon est de type Spectre/Poison ?
+            <br>
+            <input type="radio" name="q10" value="A"> Spiritomb<br>
+            <input type="radio" name="q10" value="B"> Ectoplasma<br>
+            <input type="radio" name="q10" value="C"> Ténéfix<br>
+        </div>
+
+    </form>
+
+    <button id="btnValider" onclick="corriger()">Valider mes réponses</button>
+
+    <button class="bouton-retour" onclick="transitionAccueil()">
+        Retour à l'accueil
+    </button>
+
+    <div id="resultat"></div>
+
+</div>
+
+<script>
+function corriger() {
+
+    let bonnesReponses = {
+        q1: "C",
+        q2: "A",
+        q3: "B",
+        q4: "C",
+        q5: "A",
+        q6: "C",
+        q7: "B",
+        q8: "C",
+        q9: "A",
+        q10:"B"
+    };
+
+    let score = 0;
+
+    for (let q in bonnesReponses) {
+        let choix = document.querySelector('input[name="'+q+'"]:checked');
+        if (choix && choix.value === bonnesReponses[q]) {
+            score++;
+        }
+    }
+
+    document.getElementById("resultat").innerHTML =
+        "Score : " + score + " / 10";
+
+    let btn = document.getElementById("btnValider");
+    btn.disabled = true;
+    btn.style.background = "#555";
+    btn.style.cursor = "not-allowed";
+}
+
+/* Musique */
+let musiqueActive = false;
+const musique = document.getElementById("musiquePokemon");
+const btnMusique = document.getElementById("musiquePokemonBtn");
+
+function toggleMusique() {
+    if (!musiqueActive) {
+        musique.volume = 0.5;
+        musique.play();
+        musiqueActive = true;
+        btnMusique.textContent = "Désactiver musique";
+    } else {
+        musique.pause();
+        musiqueActive = false;
+        btnMusique.textContent = "Activer musique";
+    }
+}
+
+/* Transition retour accueil */
+function transitionAccueil() {
+
+    let s = document.getElementById("transitionSound").cloneNode(true);
+    s.volume = 0.25;
+    s.play();
+
+    const screen = document.getElementById("transitionScreen");
+    screen.style.opacity = "1";
+
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 600);
+}
+</script>
+
+</body>
+</html>

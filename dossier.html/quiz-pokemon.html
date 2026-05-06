@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Pokémon - Difficulté</title>
+
+    <style>
+ body {
+    background: url("c:/Users/Maxime/Pictures/fond quiz-pokemon.png") no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding-top: 80px;
+}
+
+        .container {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .difficulty-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .difficulty-buttons button {
+            padding: 15px;
+            font-size: 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .easy { background: #4CAF50; }      
+        .medium { background: #FFC107; }    
+        .hard { background: #F44336; }      
+
+        .difficulty-buttons button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <h1>Choisis ton niveau de difficulté</h1>
+
+        <div class="difficulty-buttons">
+            <button class="easy" onclick="window.location.href='quiz-pokemon-facile-introduction.html'">Facile</button>
+            <button class="medium"onclick="window.location.href='quiz_pokemon_moyen_intro.html'">Moyen</button>
+            <button class="hard" onclick="window.location.href='quiz-pokemon-difficile-intro.html'">Difficile</button>
+        </div>
+    </div>
+
+</body>
+</html>

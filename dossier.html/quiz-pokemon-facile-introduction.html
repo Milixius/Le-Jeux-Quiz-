@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Pokémon - Introduction</title>
+
+    <style>
+        #toggleMusique {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+
+    background: linear-gradient(135deg, #ffcc00, #ff8800);
+    box-shadow: 0 4px 12px rgba(255, 150, 0, 0.4);
+
+    transition: 0.25s ease;
+    z-index: 9999;
+}
+
+#toggleMusique:hover {
+    transform: scale(1.08);
+    background: linear-gradient(135deg, #ffe066, #ffae00);
+    box-shadow: 0 6px 18px rgba(255, 170, 0, 0.6);
+}
+
+#toggleMusique:active {
+    transform: scale(0.95);
+}
+
+        body {
+            background: url("c:/Users/Maxime/Pictures/fond quiz-pokemon.png") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.25);
+            z-index: -1;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 35px;
+            border-radius: 15px;
+            max-width: 650px;
+            margin: auto;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            margin-bottom: 15px;
+            font-size: 32px;
+            color: #ffcb05;
+            text-shadow: 2px 2px 0 #2a75bb;
+        }
+
+        p {
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .start-btn {
+            margin-top: 25px;
+            padding: 15px 30px;
+            font-size: 22px;
+            border: none;
+            border-radius: 10px;
+            background: #2a75bb;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .start-btn:hover {
+            transform: scale(1.08);
+            background: #1e5a8c;
+        }
+    </style>
+
+</head>
+<body>
+<button id="toggleMusique" onclick="toggleMusique()">Activer la musique</button>
+
+<audio id="musiqueQuiz" src="c:\Users\Maxime\Music\musique_quiz_pokemon_facile.mp3" loop preload="auto"></audio>
+
+    <div class="container">
+        <h1>Quiz Pokémon – Niveau Facile</h1>
+
+        <p>Bienvenue dans le quiz Pokémon facile !</p>
+        <p>Tu vas répondre à 10 questions simples sur l’univers Pokémon.</p>
+        <p>Chaque question propose 3 choix possibles.</p>
+        <p>Bonne chance, jeune dresseur !</p>
+
+        <button class="start-btn" onclick="window.location.href='quiz-pokemon-facile.html'">
+            Commencer le quiz
+        </button>
+    </div>
+<script>
+let musiqueActive = false;
+const musique = document.getElementById("musiqueQuiz");
+const boutonMusique = document.getElementById("toggleMusique");
+
+function toggleMusique() {
+    if (!musiqueActive) {
+        musique.volume = 0.4;
+        musique.play();
+        musiqueActive = true;
+        boutonMusique.textContent = "Désactiver la musique";
+    } else {
+        musique.pause();
+        musiqueActive = false;
+        boutonMusique.textContent = "Activer la musique";
+    }
+}
+</script>
+
+</body>
+</html>
